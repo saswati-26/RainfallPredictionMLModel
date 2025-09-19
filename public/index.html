@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rainfall Predictor & Recommender</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'></text></svg>"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Rainfall Prediction</h1>
+
+      <div class="card-grid">
+        <!-- Prediction Based Recommendations -->
+        <div class="card prediction-card">
+          <h2>Get Prediction & Recommendations</h2>
+          <div class="input-group">
+            <label for="subdivision">Subdivision:</label>
+            <input
+              type="text"
+              id="subdivision"
+              placeholder="e.g., West Bengal"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="year">Year:</label>
+            <input
+              type="number"
+              id="year"
+              value="2024"
+              min="1901"
+              max="2100"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="month">Month:</label>
+            <select id="month" required>
+              <option value="">Select Month</option>
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="langPredict">Language:</label>
+            <select id="langPredict">
+              <option value="en">English</option>
+              <option value="hi">Hindi</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+            </select>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="requestRecsPredict" />
+            <label for="requestRecsPredict"
+              >Also get specific recommendations?</label
+            >
+            <div id="recommendationCheckboxesPredict" class="hidden">
+              <input type="checkbox" id="selfCarePredict" checked /><label
+                for="selfCarePredict"
+                >Self-care</label
+              ><br />
+              <input type="checkbox" id="agriculturePredict" checked /><label
+                for="agriculturePredict"
+                >Agriculture</label
+              ><br />
+              <input
+                type="checkbox"
+                id="waterConservationPredict"
+                checked
+              /><label for="waterConservationPredict"
+                >Water Conservation & Storage</label
+              ><br />
+              <input type="checkbox" id="stagnantWaterPredict" checked /><label
+                for="stagnantWaterPredict"
+                >Stagnant Water Management.</label
+              >
+            </div>
+          </div>
+
+          <button id="getPredictionBtn">Get Rainfall Info</button>
+
+          <div id="predictionResults" class="result-box hidden">
+            <h3>Rainfall Prediction:</h3>
+            <p id="predictionText"></p>
+            <div id="rainfallImage"></div>
+          </div>
+        </div>
+
+        <!-- Direct Recommendations -->
+        <div class="card direct-recs-card">
+          <h2>Get Recommendations (Direct)</h2>
+          <p class="section-description">
+            Already know the rainfall amount? Get recommendations instantly!
+          </p>
+          <div class="input-group">
+            <label for="rainfallAmount">Rainfall Amount (mm):</label>
+            <input
+              type="number"
+              id="rainfallAmount"
+              min="0"
+              value="50"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="langDirect">Language:</label>
+            <select id="langDirect">
+              <option value="en">English</option>
+              <option value="hi">Hindi</option>
+              <option value="">Odia</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+            </select>
+          </div>
+
+          <div class="checkbox-group">
+            <p>Select Recommendation Types:</p>
+            <input type="checkbox" id="selfCareDirect" checked /><label
+              for="selfCareDirect"
+              >Self-care</label
+            ><br />
+            <input type="checkbox" id="agricultureDirect" checked /><label
+              for="agricultureDirect"
+              >Agriculture</label
+            ><br />
+            <input type="checkbox" id="waterConservationDirect" checked /><label
+              for="waterConservationDirect"
+              >Water Conservation & Storage</label
+            ><br />
+            <input type="checkbox" id="stagnantWaterDirect" checked /><label
+              for="stagnantWaterDirect"
+              >Stagnant Water Management.</label
+            >
+          </div>
+          <button id="getDirectRecsBtn">Get Recommendations</button>
+        </div>
+      </div>
+
+      <!-- Recommendations Display Area -->
+      <div id="recommendationsDisplay" class="result-box hidden">
+        <h2>Recommendations</h2>
+        <div id="selfCareRecs" class="recommendation-item hidden">
+          <h3>Self-care Advice:</h3>
+          <p></p>
+        </div>
+        <div id="agricultureRecs" class="recommendation-item hidden">
+          <h3>Agriculture Advice:</h3>
+          <p></p>
+        </div>
+        <div id="waterConservationRecs" class="recommendation-item hidden">
+          <h3>Water Conservation & Storage:</h3>
+          <p></p>
+        </div>
+        <div id="stagnantWaterRecs" class="recommendation-item hidden">
+          <h3>Stagnant Water Management:</h3>
+          <p></p>
+        </div>
+      </div>
+
+      <div id="errorDisplay" class="error-message hidden"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
